@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json());
 
 app.listen(3000, () => {
   console.log('server running at port 3000')
@@ -8,7 +11,7 @@ app.listen(3000, () => {
 app.post('/', (req, res) => {
   var email = req.body.email;
   var amount = req.body.amount;
-
+  
   res.send({'email' : email ,'amount' : amount})
 })
 
