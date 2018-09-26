@@ -22,8 +22,12 @@ app.post('/', async (req, res) => {
   }
   console.log('correct amount')
   var result = await save_user_information({'email' : email ,'amount' : amount});
-  res.send(result)
-  //res.send({'email' : email ,'amount' : amount})
+  res.send(result);
+});
+
+app.get('/get_total_amount', async (req, res) =>{
+  var result = await get_total_amount();
+  res.send(result);
 });
 
 app.get('/', (req, res) => {
