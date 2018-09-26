@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const {save_user_information} = require('./models/server_db.js');
+const path = require('path')
+const publicPath = path.join(__dirname, './public')
 
 app.use(bodyParser.json());
+app.use(express.static(publicPath));
 
 app.listen(3000, () => {
   console.log('server running at port 3000')
