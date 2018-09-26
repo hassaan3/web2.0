@@ -24,3 +24,7 @@ function handleDisconnect() {
       throw err;
   });
 }
+
+handleDisconnect();
+
+module.exports = connection;
