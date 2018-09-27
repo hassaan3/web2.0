@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const {save_user_information} = require('./models/server_db.js');
+const {
+  save_user_information,
+  get_total_amount,
+  get_list_of_participants
+} = require('./models/server_db.js');
 const path = require('path')
 const publicPath = path.join(__dirname, './public')
 
@@ -29,8 +33,24 @@ app.post('/', async (req, res) => {
 });
 
 app.get('/get_total_amount', async (req, res) =>{
+  console.log('get total amount');
   var result = await get_total_amount();
   res.send(result);
+});
+
+app.get('/pick_winner', async (req, res) => {
+  var result = await get_total_amount();
+  var total_amount = result[0].total_amount;
+  result = await get_list_of_participants();
+  var list_of_participants = JSON.parse(JSON.stringify(result));
+  var participants = [];
+  list_of_participants.forEach(function (element){
+    participants.push(element.email);
+  });
+  console.log(participants);
+  //var list_of_participants = JSON.parse(JSON.stringify(list_of_participants));
+  //console.log(list_of_participants);
+  //res.send(list_of_participants);
 });
 
 app.get('/', (req, res) => {
