@@ -45,9 +45,11 @@ app.get('/pick_winner', async (req, res) => {
   var list_of_participants = JSON.parse(JSON.stringify(result));
   var participants = [];
   list_of_participants.forEach(function (element){
-    participants.push(element.email);
+    participants.push(element.Email);
   });
-  console.log(participants);
+  //req.session.total_amount = total_amount;
+  var winner = participants[Math.round(Math.random(participants.length - 1))];
+  res.send(winner);
   //var list_of_participants = JSON.parse(JSON.stringify(list_of_participants));
   //console.log(list_of_participants);
   //res.send(list_of_participants);
